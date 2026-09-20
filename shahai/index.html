@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="鲨海 - 沉浸式深海探险与海洋生态科普平台，提供深海生物图鉴、海洋探险纪录片推荐及海洋保护资讯。">
+    <meta name="keywords" content="鲨海,深海探险,海洋生物,海洋纪录片,海洋保护">
+    <title>鲨海-深海探险与海洋生态科普指南</title>
+    <style>
+        :root {
+            --primary-color: #0e3a4b;
+            --accent-color: #00bcd4;
+            --accent-hover: #008ba3;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+            --bg-light: #f4f8fb;
+            --white: #ffffff;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 16px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-actions button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .nav-actions button:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(14, 58, 75, 0.9), rgba(0, 188, 212, 0.6)), url('https://picsum.photos/seed/sharkocean/1600/900') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Layout */
+        main {
+            flex: 1;
+            padding: 60px 0;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e1e1e1;
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .view-all {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-tag {
+            font-size: 12px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar-widget {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .widget-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .rank-list {
+            list-style: none;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .rank-number {
+            width: 24px;
+            height: 24px;
+            background-color: #eee;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+
+        .rank-item:nth-child(1) .rank-number { background-color: #ff9800; color: white; }
+        .rank-item:nth-child(2) .rank-number { background-color: #ff5722; color: white; }
+        .rank-item:nth-child(3) .rank-number { background-color: #795548; color: white; }
+
+        .rank-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .rank-info span {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            gap: 20px;
+        }
+
+        .stat-item h3 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* FAQ Section */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .faq-item h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .faq-item p {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0b2532;
+            color: #a0b0c0;
+            padding: 60px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h2 {
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #a0b0c0;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+                    <path d="M12 6v6l4 2"></path>
+                </svg>
+                鲨海<span>DeepSea</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">深海图鉴</a></li>
+                    <li><a href="#">探险纪录片</a></li>
+                    <li><a href="#">海洋保护</a></li>
+                    <li><a href="#">关于我们</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button>订阅周刊</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>探索未知的深海世界</h1>
+            <p>鲨海致力于提供最专业的海洋生物科普、深海探险纪录片解读以及海洋环境保护资讯。带您潜入千米之下，见证生命的奇迹。</p>
+            <a href="#featured" class="hero-btn">开始探索</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="grid-layout">
+            <!-- Left Content -->
+            <div class="content-area">
+                
+                <!-- Featured Section -->
+                <section id="featured">
+                    <div class="section-header">
+                        <h2 class="section-title">本周精选内容</h2>
+                        <a href="#" class="view-all">查看更多 &rarr;</a>
+                    </div>
+                    <div class="card-grid">
+                        <article class="card">
+                            <img src="https://picsum.photos/seed/shark1/400/300" alt="大白鲨捕食" class="card-image">
+                            <div class="card-content">
+                                <span class="card-tag">深海生物</span>
+                                <h3 class="card-title">大白鲨的狩猎策略与习性研究</h3>
+                                <p class="card-desc">深入分析大白鲨在水下的感知系统及其捕食行为，揭示这一顶级掠食者的生存智慧。</p>
+                            </div>
+                        </article>
+                        <article class="card">
+                            <img src="https://picsum.photos/seed/shark2/400/300" alt="深海热液喷口" class="card-image">
+                            <div class="card-content">
+                                <span class="card-tag">科学探索</span>
+                                <h3 class="card-title">深海热液喷口：地球的神秘能量源</h3>
+                                <p class="card-desc">探索海底火山喷口周围独特的生态系统，发现生命在极端环境下的顽强存在。</p>
+                            </div>
+                        </article>
+                        <article class="card">
+                            <img src="https://picsum.photos/seed/shark3/400/300" alt="珊瑚礁生态" class="card-image">
+                            <div class="card-content">
+                                <span class="card-tag">环保关注</span>
+                                <h3 class="card-title">海洋酸化对珊瑚礁的毁灭性影响</h3>
+                                <p class="card-desc">探讨二氧化碳排放如何改变海洋化学环境，并威胁全球最大的海洋生物栖息地。</p>
+                            </div>
+                        </article>
+                        <article class="card">
+                            <img src="https://picsum.photos/seed/shark4/400/300" alt="海洋保护" class="card-image">
+                            <div class="card-content">
+                                <span class="card-tag">纪录片</span>
+                                <h3 class="card-title">《蓝色星球III》幕后制作花絮</h3>
+                                <p class="card-desc">揭秘BBC摄制组如何在极端条件下捕捉到前所未有的深海镜头。</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Knowledge Base -->
+                <section>
+                    <div class="section-header">
+                        <h2 class="section-title">海洋科普百科</h2>
+                        <a href="#" class="view-all">浏览图鉴 &rarr;</a>
+                    </div>
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <h3>鲨鱼真的会攻击人类吗？</h3>
+                            <p>绝大多数鲨鱼对人类不感兴趣，所谓的“攻击”往往是出于好奇或误判。了解鲨鱼的习性有助于消除不必要的恐惧。</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>深海生物是如何适应高压环境的？</h3>
+                            <p>深海生物进化出了特殊的生理机制，如无骨骼结构、特殊的蛋白质和细胞膜结构，以抵抗巨大的水压。</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>塑料污染对海洋生物有什么具体危害？</h3>
+                            <p>海洋生物常误食塑料垃圾导致消化道堵塞、营养不良甚至死亡。微塑料还会通过食物链富集，最终影响人类健康。</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>为什么海洋保护如此重要？</h3>
+                            <p>海洋占地球表面积的71%，调节全球气候并孕育了数百万种生物。保护海洋就是保护人类赖以生存的地球系统。</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar">
+                <!-- Popular Tags -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">热门标签</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <a href="#" style="background:#e0f7fa; color:#006064; padding:5px 12px; border-radius:15px; font-size:12px; text-decoration:none;">大白鲨</a>
+                        <a href="#" style="background:#e0f7fa; color:#006064; padding:5px 12px; border-radius:15px; font-size:12px; text-decoration:none;">深海潜水</a>
+                        <a href="#" style="background:#e0f7fa; color:#006064; padding:5px 12px; border-radius:15px; font-size:12px; text-decoration:none;">珊瑚白化</a>
+                        <a href="#" style="background:#e0f7fa; color:#006064; padding:5px 12px; border-radius:15px; font-size:12px; text-decoration:none;">鲸鱼迁徙</a>
+                        <a href="#" style="background:#e0f7fa; color:#006064; padding:5px 12px; border-radius:15px; font-size:12px; text-decoration:none;">极地海洋</a>
+                    </div>
+                </div>
+
+                <!-- Top Species List -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">人气物种榜</h3>
+                    <ul class="rank-list">
+                        <li class="rank-item">
+                            <span class="rank-number">1</span>
+                            <div class="rank-info">
+                                <h4>虎鲨</h4>
+                                <span>凶猛掠食者</span>
+                            </div>
+                        </li>
+                        <li class="rank-item">
+                            <span class="rank-number">2</span>
+                            <div class="rank-info">
+                                <h4>蓝鳍金枪鱼</h4>
+                                <span>海洋速度之王</span>
+                            </div>
+                        </li>
+                        <li class="rank-item">
+                            <span class="rank-number">3</span>
+                            <div class="rank-info">
+                                <h4>海龟</h4>
+                                <span>海洋守护者</span>
+                            </div>
+                        </li>
+                        <li class="rank-item">
+                            <span class="rank-number">4</span>
+                            <div class="rank-info">
+                                <h4>深海鮟鱇鱼</h4>
+                                <span>发光奇观</span>
+                            </div>
+                        </li>
+                        <li class="rank-item">
+                            <span class="rank-number">5</span>
+                            <div class="rank-info">
+                                <h4>座头鲸</h4>
+                                <span>声波歌唱家</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="sidebar-widget" style="background: linear-gradient(to right, #0e3a4b, #00bcd4); color: white;">
+                    <h3 class="widget-title" style="border-left-color: white;">订阅深海周刊</h3>
+                    <p style="font-size: 13px; margin-bottom: 15px; opacity: 0.9;">每周获取最新的海洋探险资讯与科普文章。</p>
+                    <input type="email" placeholder="您的邮箱地址" style="width: 100%; padding: 10px; border: none; border-radius: 4px; margin-bottom: 10px; outline: none;">
+                    <button style="width: 100%; padding: 10px; background: white; color: var(--primary-color); border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">立即订阅</button>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h3>200+</h3>
+                <p>收录海洋物种</p>
+            </div>
+            <div class="stat-item">
+                <h3>5000+</h3>
+                <p>科普文章</p>
+            </div>
+            <div class="stat-item">
+                <h3>100+</h3>
+                <p>合作科研机构</p>
+            </div>
+            <div class="stat-item">
+                <h3>10M+</h3>
+                <p>年度访客</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>鲨海 DeepSea</h2>
+                    <p style="font-size: 14px; line-height: 1.8;">致力于海洋科普教育与生态保护，让更多人了解深海的奥秘与脆弱。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>探索</h4>
+                    <ul>
+                        <li><a href="#">深海生物</a></li>
+                        <li><a href="#">海洋地理</a></li>
+                        <li><a href="#">探险纪录片</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>资源</h4>
+                    <ul>
+                        <li><a href="#">科普图库</a></li>
+                        <li><a href="#">研究论文</a></li>
+                        <li><a href="#">下载中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关于</h4>
+                    <ul>
+                        <li><a href="#">团队介绍</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 鲨海 DeepSea 版权所有. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+              </html>
