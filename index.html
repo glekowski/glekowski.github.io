@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cs1.6生化单机版-经典反恐精英生化模式离线游玩指南与资源</title>
+    <meta name="description" content="提供cs1.6生化单机版下载、安装教程、配置优化及游戏玩法攻略。包含僵尸模式、地图资源、武器修改及服务器搭建指南，助您重温经典FPS射击体验。">
+    <meta name="keywords" content="cs1.6, cs1.6生化单机版, 反恐精英1.6, 生化模式, 桌面游戏, 离线射击">
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #2c3e50;
+            --accent-color: #f1c40f;
+            --bg-color: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666;
+            --border-radius: 8px;
+            --spacing-unit: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #bdc3c7;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Download Section */
+        .download-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+        }
+
+        .download-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .version-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .version-info .meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .download-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-download {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download:hover {
+            background-color: #219150;
+        }
+
+        /* Guide List */
+        .guide-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .guide-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .guide-content {
+            padding: 24px;
+            flex: 1;
+        }
+
+        .guide-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--secondary-color);
+        }
+
+        .guide-content p {
+            color: var(--text-light);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+
+        .guide-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .guide-link::after {
+            content: '→';
+            margin-left: 4px;
+            transition: transform 0.2s;
+        }
+
+        .guide-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 60px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+        }
+
+        .faq-question:hover {
+            background-color: #fafafa;
+        }
+
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: #fcfcfc;
+            color: var(--text-light);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px 24px;
+            max-height: 300px; /* Approximate max height */
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: #bdc3c7;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+                height: auto;
+                padding: 16px 0;
+            }
+            nav ul {
+                margin: 16px 0;
+                gap: 16px;
+                font-size: 0.9rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .download-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .download-actions {
+                width: 100%;
+            }
+            .btn-download {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                <span>CS1.6</span>生化单机版
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#download">下载中心</a></li>
+                    <li><a href="#guide">玩法攻略</a></li>
+                    <li><a href="#server">服务器</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </nav>
+            <a href="#download" class="cta-button">立即下载</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>经典重现：CS1.6生化单机版</h1>
+            <p>无需联网，即刻体验最纯粹的生化模式。挑战成群的僵尸，使用强力武器，在自定义地图中尽情战斗。</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">获取游戏资源</a>
+                <a href="#guide" class="btn btn-outline">阅读安装指南</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <!-- Feature Highlights -->
+        <section class="features-grid">
+            <article class="feature-card">
+                <span class="feature-icon">🧟</span>
+                <h3>经典生化模式</h3>
+                <p>完美复刻CS1.6原版生化模式机制，包括感染、跳跃、生化手雷等核心玩法，还原经典紧张感。</p>
+            </article>
+            <article class="feature-card">
+                <span class="feature-icon">🛡️</span>
+                <h3>强力武器库</h3>
+                <p>内置多把高威力武器，包括AWP-毒龙、M249等，助你轻松应对海量僵尸围攻。</p>
+            </article>
+            <article class="feature-card">
+                <span class="feature-icon">🗺️</span>
+                <h3>丰富地图资源</h3>
+                <p>收录多张经典生化地图，如生化金字塔、生化别墅等，场景多样，挑战性十足。</p>
+            </article>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download-section">
+            <div class="download-header">
+                <div class="version-info">
+                    <h3>最新整合版 v2.5</h3>
+                    <p class="meta">更新日期：2023年10月 | 文件大小：约 850MB | 包含：游戏本体+MOD+补丁</p>
+                </div>
+                <div class="download-actions">
+                    <a href="#" class="btn-download" onclick="alert('请通过搜索引擎搜索：cs1.6生化单机版整合包 获取下载链接。本页面为介绍页。'); return false;">
+                        <span>⬇ 下载资源</span>
+                    </a>
+                    <a href="#" class="btn-download" style="background-color: #7f8c8d;" onclick="alert('请通过搜索引擎搜索：cs1.6生化单机版 安装教程 获取详细步骤。'); return false;">
+                        <span>📖 查看安装说明</span>
+                    </a>
+                </div>
+            </div>
+            <p style="color: #666; margin-top: 16px;">
+                <strong>使用说明：</strong>请确保您的电脑安装了DirectX 9.0c或更高版本。下载后解压至任意文件夹，双击“cs16.exe”或“启动游戏.bat”即可开始游戏。建议关闭杀毒软件以避免误删游戏文件。
+            </p>
+        </section>
+
+        <!-- Guide Section -->
+        <section id="guide">
+            <div class="section-title">
+                <h2>新手指南与进阶技巧</h2>
+                <p>快速上手CS1.6生化单机版，掌握生存法则</p>
+            </div>
+
+            <div class="guide-list">
+                <article class="guide-item">
+                    <div class="guide-content">
+                        <h3>安装步骤详解</h3>
+                        <p>下载整合包后，通常需要先安装原版CS1.6客户端，然后覆盖MOD文件。具体路径通常为：C:\Program Files (x86)\Valve\Steam\steamapps\common\Counter-Strike\cstrike。</p>
+                        <a href="#" class="guide-link">查看详细图文教程</a>
+                    </div>
+                </article>
+                <article class="guide-item">
+                    <div class="guide-content">
+                        <h3>如何创建局域网房间</h3>
+                        <p>进入游戏主菜单，点击“创建游戏”，在地图选择中选择生化专用地图。设置好服务器名称和密码后，点击“开始游戏”。局域网内其他玩家搜索该房间即可加入。</p>
+                        <a href="#" class="guide-link">进入服务器列表</a>
+                    </div>
+                </article>
+                <article class="guide-item">
+                    <div class="guide-content">
+                        <h3>生化模式获胜条件</h3>
+                        <p>作为人类，目标是存活到最后。利用地形高低差（如金字塔）阻挡僵尸进攻，或者利用加特林机枪等高射速武器进行火力压制。如果不幸感染，请尽力阻挡其他人类。</p>
+                        <a href="#" class="guide-link">查看武器对比</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <div class="section-title">
+                <h2>常见问题解答</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">游戏启动后黑屏或无反应怎么办？</div>
+                <div class="faq-answer">
+                    <p>请检查显卡驱动是否过旧，尝试以兼容模式运行游戏。如果是黑屏，尝试修改config.cfg文件中的setinfo "vgui_menus" "1" 并将分辨率设置与显示器一致。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">如何添加自定义地图？</div>
+                <div class="faq-answer">
+                    <p>将下载的地图文件（.bsp格式）放入cstrike/maps文件夹内，然后在游戏内控制台输入"map 地图名称"即可加载。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">生化模式僵尸怎么玩？</div>
+                <div class="faq-answer">
+                    <p>僵尸出生后具有无限生命，通过触碰人类进行感染。建议利用跳跃技能（按空格键）跨越障碍，寻找人类进行围堵。</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <p>本站致力于提供最优质的CS1.6单机游戏资源整理与攻略分享，让经典游戏在电脑上焕发新生。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#download">资源下载</a></li>
+                        <li><a href="#guide">游戏攻略</a></li>
+                        <li><a href="#">MOD下载</a></li>
+                        <li><a href="#">皮肤皮肤</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>支持与反馈</h4>
+                    <ul>
+                        <li><a href="#">问题反馈</a></li>
+                        <li><a href="#">游戏论坛</a></li>
+                        <li><a href="#">免责声明</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CS1.6生化单机版资源站. All Rights Reserved. 本站仅为资源索引与介绍页面。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+</html>
